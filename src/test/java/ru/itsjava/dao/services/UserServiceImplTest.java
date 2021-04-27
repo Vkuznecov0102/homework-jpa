@@ -44,6 +44,17 @@ public class UserServiceImplTest {
     private final User objFourth=userFourth.get();
 
     @Test
+    public void shouldHaveCorrectCount(){
+        petService.insertPet(objPet);
+        emailService.insertEmail(mail);
+        userService.insertUser(objUser);
+        assertAll(
+                ()-> assertEquals(userService.countUserByName("Иванов ОА"),1),
+                ()-> assertEquals(userService.countUserByName("Кирьяков ОА"),0)
+        );
+    }
+
+    @Test
     public void shouldHaveCorrectInsert(){
         petService.insertPet(objPet);
         emailService.insertEmail(mail);

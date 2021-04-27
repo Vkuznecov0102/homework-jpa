@@ -31,6 +31,15 @@ public class EmailServiceImplTest {
     private final Email objMailFourth=emailFourth.get();
 
     @Test
+    public void shouldHaveCorrectCount(){
+        service.insertEmail(objMail);
+        assertAll(
+                ()-> assertEquals(1, service.countEmailByAddress("alexandro@protonmail.com")),
+                ()-> assertEquals(0, service.countEmailByAddress("alexandro@gmail.com"))
+        );
+    }
+
+    @Test
     public void shouldHaveCorrectInsert(){
         service.insertEmail(objMail);
         assertEquals(service.getEmailById(1L),email);
@@ -50,8 +59,10 @@ public class EmailServiceImplTest {
     @Test
     public void shouldHaveCorrectDelete(){
         service.insertEmail(objMail);
-        assertEquals(service.getEmailById(1L),email);
-        assertNotNull(service.getEmailById(1L));
+        assertAll(
+                ()-> assertEquals(service.getEmailById(1L),email),
+                ()->assertNotNull(service.getEmailById(1L))
+        );
         service.deleteEmail(1L);
         assertEquals(Optional.empty(), service.getEmailById(1L));
     }

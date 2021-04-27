@@ -31,6 +31,15 @@ public class PetServiceImplTest {
     private final Pet objFourth=petFourth.get();
 
     @Test
+    public void shouldHaveCorrectCount(){
+        service.insertPet(objPet);
+        assertAll(
+                ()-> assertEquals(1,service.countPetByName("Мурзик")),
+                ()-> assertEquals(0,service.countPetByName("Редиска"))
+        );
+    }
+
+    @Test
     public void shouldHaveCorrectInsert(){
         service.insertPet(objPet);
         assertEquals(service.getPetById(1L),pet);
@@ -61,8 +70,10 @@ public class PetServiceImplTest {
     @Test
     public void shouldHaveCorrectDelete(){
         service.insertPet(objPet);
-        assertEquals(service.getPetById(1L),pet);
-        assertNotNull(service.getPetById(1L));
+        assertAll(
+                ()-> assertEquals(service.getPetById(1L),pet),
+                ()->assertNotNull(service.getPetById(1L))
+        );
         service.deletePet(1L);
         assertEquals(Optional.empty(), service.getPetById(1L));
     }

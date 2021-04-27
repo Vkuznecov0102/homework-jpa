@@ -17,19 +17,16 @@ public class EmailServiceImpl implements EmailService {
     private final EmailRepository repository;
 
     @Override
-    @Transactional
     public long countEmailByAddress(String address) {
         return repository.countByAddress(address);
     }
 
     @Override
-    @Transactional
     public Optional<Email> getEmailById(long id) {
         return repository.findById(id);
     }
 
     @Override
-    @Transactional
     public void insertEmail(Email email) {
         repository.saveAndFlush(email);
     }
@@ -47,7 +44,6 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    @Transactional
     public List<Email> findAll() {
         return repository.findAll();
     }

@@ -16,19 +16,16 @@ public class UserServiceImpl implements UserService {
     private final UserRepository repository;
 
     @Override
-    @Transactional
     public long countUserByName(String fio) {
         return repository.countUserByName(fio);
     }
 
     @Override
-    @Transactional
     public Optional<User> getUserById(long id) {
         return repository.findById(id);
     }
 
     @Override
-    @Transactional
     public void insertUser(User user) {
         repository.saveAndFlush(user);
     }
@@ -46,7 +43,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public List<User> findAll() {
         return repository.findAll();
     }

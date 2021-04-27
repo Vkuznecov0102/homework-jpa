@@ -16,25 +16,21 @@ public class PetServiceImpl implements PetService {
     private final PetRepository repository;
 
     @Override
-    @Transactional
     public long countPetByType(String type) {
         return repository.countPetByType(type);
     }
 
     @Override
-    @Transactional
     public long countPetByName(String name) {
         return repository.countPetByName(name);
     }
 
     @Override
-    @Transactional
     public Optional<Pet> getPetById(long id) {
         return repository.findById(id);
     }
 
     @Override
-    @Transactional
     public void insertPet(Pet pet) {
         repository.saveAndFlush(pet);
     }
@@ -58,7 +54,6 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    @Transactional
     public List<Pet> findAll() {
         return repository.findAll();
     }
